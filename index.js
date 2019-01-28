@@ -153,7 +153,7 @@ app.get('/decide_task', (req, res) => {
                           var newvalues = { $set: {coins: coins} };
                           dbo.collection("users").updateOne(myquery, newvalues, function(err, resultRem) {
                             if (err) throw err;
-                            res.send('good')
+                            res.send('{"type": "ok"}')
                           })
                         }
                       }
