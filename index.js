@@ -173,6 +173,21 @@ app.get('/decide_task', (req, res) => {
   })
 })
 
+app.get('/user', (req, res) => {
+  var login = req.query.login;
+  MongoClient.connect(url, function(err, db) {
+    if (err) throw err;
+    var dbo = db.db("polinka");
+    dbo.collection("users").find().toArray(function(err, result) {
+      for (var i = 0; i < result.length; i++) {
+        if(result[i].login == login){
+          res.send(JSON.stringify(result[i]))
+        }
+      }
+    })
+  })
+})
+
 app.get('/get_problems', (req, res) => {
   MongoClient.connect(url, function(err, db) {
     if (err) throw err;
