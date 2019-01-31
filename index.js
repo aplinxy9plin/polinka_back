@@ -4,6 +4,12 @@ var MongoClient = require('mongodb').MongoClient;
 var ObjectId = require('mongodb').ObjectId;
 var url = "mongodb://localhost:27017/";
 
+app.all('/*', function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+});
+
 app.get('/test', (req, res) => {
   res.send('Working')
 })
@@ -40,10 +46,8 @@ app.get('/login', (req, res) => {
       for (var i = 0; i < result.length; i++) {
         if(result[i].login == login && result[i].password == password){
           done = "ok"
-          // res.send('{"auth": "ok"}')
         }else if (result[i].login == login && result[i].password !== password) {
           done = "bad_password"
-          // res.send('{"auth": "bad_password"}')
         }
         if(i == result.length-1){
           res.send('{"auth": "'+done+'"}')
