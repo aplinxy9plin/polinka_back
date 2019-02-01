@@ -144,7 +144,7 @@ app.get('/decide_task', (req, res) => {
             dbo.collection("users").find().toArray(function(err, resultMe) {
               for (var j = 0; j < resultMe.length; j++) {
                 if(resultMe[j].login == extend){
-                  var coins = resultMe[j].coins + my_problem.coins;
+                  var coins = parseInt(resultMe[j].coins) + parseInt(my_problem.coins);
                   var myquery = { _id:  ObjectId(resultMe[j]._id)}
                   var newvalues = { $set: {coins: coins} };
                   dbo.collection("users").updateOne(myquery, newvalues, function(err, resultRem) {
@@ -152,7 +152,7 @@ app.get('/decide_task', (req, res) => {
                     dbo.collection("users").find().toArray(function(err, resultQ) {
                       for (var o = 0; o < resultQ.length; o++) {
                         if(resultQ[o].login == my_problem.customer){
-                          var coins = resultMe[o].coins - my_problem.coins;
+                          var coins = parseInt(resultMe[o].coins) - parseInt(my_problem.coins);
                           var myquery = { _id:  ObjectId(resultQ[o]._id)}
                           var newvalues = { $set: {coins: coins} };
                           dbo.collection("users").updateOne(myquery, newvalues, function(err, resultRem) {
