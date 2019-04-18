@@ -200,7 +200,7 @@ app.get('/get_problems', (req, res) => {
 
 app.listen(1488, () => {
   console.log('Backend is listening on port 1488');
-  MongoClient.connect(url, function(err, db) {
+/*  MongoClient.connect(url, function(err, db) {
     var dbo = db.db("polinka")
       dbo.collection("users").drop(function(err, delOK) {
         if (err) throw err;
@@ -210,5 +210,5 @@ app.listen(1488, () => {
           if (delOK) console.log("Collection deleted");
         });
       });
-  })
+  })*/
 })
